@@ -1,0 +1,841 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>法人向けドネーションページ ワイヤーフレーム</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Hiragino Sans', 'Noto Sans JP', sans-serif;
+    background: #f0f0f0;
+    color: #333;
+    font-size: 14px;
+    line-height: 1.6;
+  }
+
+  /* ワイヤー注記 */
+  .wire-label {
+    font-size: 10px;
+    color: #999;
+    background: #fffbe6;
+    border: 1px dashed #ccc;
+    padding: 2px 6px;
+    border-radius: 3px;
+    display: inline-block;
+    margin-bottom: 6px;
+  }
+
+  /* ページ全体 */
+  .page {
+    max-width: 750px;
+    min-width: 750px;
+    margin: 32px auto;
+    background: #fff;
+    border: 1px solid #ccc;
+  }
+
+  /* ナビゲーション */
+  .nav {
+    background: #fff;
+    border-bottom: 1px solid #ddd;
+    padding: 12px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .nav-logo {
+    font-size: 13px;
+    font-weight: bold;
+    color: #333;
+  }
+  .nav-link {
+    font-size: 12px;
+    color: #666;
+    border: 1px solid #aaa;
+    padding: 5px 14px;
+    border-radius: 2px;
+  }
+
+  /* ヒーロー */
+  .hero {
+    background: #e8e8e8;
+    padding: 56px 40px 48px;
+    position: relative;
+  }
+  .hero h1 {
+    font-size: 28px;
+    font-weight: bold;
+    color: #222;
+    line-height: 1.4;
+    margin-bottom: 12px;
+  }
+  .hero p {
+    font-size: 13px;
+    color: #555;
+  }
+
+  /* セクション共通 */
+  .section {
+    padding: 32px 40px;
+    border-bottom: 1px solid #eee;
+  }
+  .section-title {
+    font-size: 11px;
+    font-weight: bold;
+    color: #888;
+    letter-spacing: .08em;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+  }
+
+  /* 2択ボタン */
+  .cta-buttons {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(160px, 1fr));
+    gap: 16px;
+    margin-bottom: 0;
+  }
+  .cta-btn {
+    border: 1.5px solid #555;
+    padding: 18px 16px;
+    text-align: center;
+    border-radius: 2px;
+    background: #fff;
+  }
+  .cta-btn .btn-sub {
+    font-size: 11px;
+    color: #888;
+    margin-bottom: 4px;
+  }
+  .cta-btn .btn-main {
+    font-size: 16px;
+    font-weight: bold;
+    color: #222;
+  }
+
+  /* 税制優遇 */
+  .tax-block {
+    margin-top: 24px;
+    border-left: 4px solid #1d9e75;
+    padding: 12px 16px;
+    background: #fafafa;
+  }
+  .tax-block p {
+    font-size: 13px;
+    color: #333;
+    line-height: 1.8;
+  }
+  .tax-block .highlight {
+    color: #1d9e75;
+    font-weight: bold;
+  }
+  .tax-block .note {
+    font-size: 11px;
+    color: #888;
+    margin-top: 8px;
+  }
+  .tax-block .note a {
+    color: #1d9e75;
+    text-decoration: underline;
+  }
+
+  /* 団体紹介 */
+  .org-intro {
+    display: grid;
+    grid-template-columns: 180px minmax(0, 1fr);
+    gap: 24px;
+    align-items: start;
+  }
+  .org-img {
+    background: #ddd;
+    height: 140px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #aaa;
+    font-size: 11px;
+    border: 1px solid #ccc;
+  }
+  .org-img::after { content: '画像'; }
+  .org-text h3 {
+    font-size: 14px;
+    font-weight: bold;
+    color: #222;
+    margin-bottom: 8px;
+  }
+  .org-text p {
+    font-size: 13px;
+    color: #555;
+    line-height: 1.7;
+  }
+
+  /* 活動領域 */
+  .activities {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(120px, 1fr));
+    gap: 16px;
+    margin-top: 24px;
+  }
+  .activity-card {
+    text-align: center;
+  }
+  .activity-card p {
+    text-align: left;
+  }
+  .activity-img {
+    background: #ddd;
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #aaa;
+    font-size: 11px;
+    border: 1px solid #ccc;
+    margin-bottom: 8px;
+  }
+  .activity-img::after { content: '画像'; }
+  .activity-card h4 {
+    font-size: 13px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 4px;
+  }
+  .activity-card p {
+    font-size: 11px;
+    color: #777;
+    line-height: 1.5;
+  }
+
+  /* SDGs */
+  .sdgs {
+    margin-top: 24px;
+    padding-top: 20px;
+    border-top: 1px solid #eee;
+  }
+  .sdgs-label {
+    font-size: 11px;
+    color: #999;
+    margin-bottom: 8px;
+    font-weight: bold;
+    letter-spacing: .05em;
+  }
+  .sdgs-intro {
+    font-size: 13px;
+    color: #555;
+    line-height: 1.7;
+    margin-bottom: 16px;
+    padding: 12px 14px;
+    background: #f5f5f5;
+    border-left: 3px solid #1d9e75;
+  }
+  .sdgs-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .sdg-item {
+    display: grid;
+    grid-template-columns: 48px minmax(0, 1fr);
+    gap: 12px;
+    align-items: start;
+  }
+  .sdg-icon {
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 3px;
+    flex-shrink: 0;
+  }
+  .sdg-3  { background: #4C9F38; }
+  .sdg-4  { background: #C5192D; }
+  .sdg-10 { background: #DD1367; }
+  .sdg-16 { background: #00689D; }
+  .sdg-17 { background: #19486A; }
+  .sdg-text { padding-top: 2px; }
+  .sdg-title {
+    font-size: 13px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 3px;
+  }
+  .sdg-desc {
+    font-size: 12px;
+    color: #666;
+    line-height: 1.6;
+  }
+
+  /* 支援企業ロゴ */
+  .supporters {
+    padding: 28px 40px;
+    border-bottom: 1px solid #eee;
+    background: #fafafa;
+  }
+  .supporters-title {
+    font-size: 11px;
+    color: #888;
+    font-weight: bold;
+    letter-spacing: .08em;
+    margin-bottom: 16px;
+  }
+  .logo-grid {
+    display: grid;
+    grid-template-columns: repeat(6, minmax(60px, 1fr));
+    gap: 12px;
+  }
+  .logo-box {
+    background: #e8e8e8;
+    height: 52px;
+    border: 1px solid #ccc;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 10px;
+    color: #aaa;
+    border-radius: 2px;
+  }
+  .logo-box::after { content: 'ロゴ'; }
+
+  /* CTAバナー */
+  .cta-banner {
+    padding: 28px 40px;
+    border-bottom: 1px solid #eee;
+    background: #f5f5f5;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .cta-banner-text h3 {
+    font-size: 15px;
+    font-weight: bold;
+    color: #222;
+    margin-bottom: 6px;
+  }
+  .cta-banner-text p {
+    font-size: 12px;
+    color: #666;
+    line-height: 1.6;
+  }
+  .cta-banner-btn {
+    border: 1.5px solid #333;
+    padding: 12px 24px;
+    font-size: 13px;
+    font-weight: bold;
+    color: #333;
+    white-space: nowrap;
+    border-radius: 2px;
+    margin-left: 24px;
+    flex-shrink: 0;
+  }
+
+  /* セクション区切りタイトル */
+  .section-heading {
+    padding: 28px 40px 0;
+    border-top: 3px solid #333;
+    margin-top: 0;
+  }
+  .section-heading h2 {
+    font-size: 16px;
+    font-weight: bold;
+    color: #222;
+    border-left: 4px solid #333;
+    padding-left: 12px;
+    margin-bottom: 8px;
+  }
+  .section-heading p {
+    font-size: 12px;
+    color: #666;
+    padding-left: 16px;
+    margin-bottom: 24px;
+  }
+
+  /* プランカード */
+  .plan-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 20px;
+    padding: 0 40px 28px;
+  }
+  .plan-card {
+    border: 1px solid #ccc;
+    padding: 20px;
+    border-radius: 2px;
+  }
+  .plan-card h3 {
+    font-size: 14px;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 4px;
+  }
+  .plan-card .plan-sub {
+    font-size: 11px;
+    color: #888;
+    text-align: center;
+    margin-bottom: 12px;
+  }
+  .plan-card .plan-price {
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 4px;
+  }
+  .plan-card .plan-note {
+    font-size: 11px;
+    color: #888;
+    text-align: center;
+    margin-bottom: 16px;
+  }
+  .plan-divider {
+    border: none;
+    border-top: 1px solid #eee;
+    margin: 12px 0;
+  }
+  .plan-benefits {
+    font-size: 11px;
+    color: #777;
+    margin-bottom: 12px;
+  }
+  .plan-benefits p { margin-bottom: 4px; }
+  .plan-benefits p::before { content: '□ '; color: #bbb; }
+  .plan-btn {
+    display: block;
+    border: 1px solid #555;
+    padding: 9px;
+    text-align: center;
+    font-size: 12px;
+    color: #333;
+    margin-bottom: 8px;
+    border-radius: 2px;
+  }
+  .plan-bank {
+    font-size: 11px;
+    color: #888;
+    text-align: right;
+    margin-top: 4px;
+  }
+  .plan-bank a { color: #1d9e75; text-decoration: underline; }
+
+  /* 再入会注記 */
+  .rejoining-note {
+    margin: 0 40px 24px;
+    background: #f5f5f5;
+    padding: 14px 18px;
+    font-size: 12px;
+    color: #666;
+    border: 1px solid #e0e0e0;
+  }
+  .rejoining-note .btn-row {
+    margin-top: 10px;
+    display: flex;
+    gap: 8px;
+  }
+  .small-btn {
+    border: 1px solid #aaa;
+    padding: 5px 12px;
+    font-size: 11px;
+    color: #555;
+    border-radius: 2px;
+  }
+
+  /* 一般・指定寄付カード */
+  .donation-card-wrap {
+    padding: 0 40px 32px;
+  }
+  .donation-card {
+    border: 1px solid #ccc;
+    padding: 24px;
+    border-radius: 2px;
+    max-width: 400px;
+    margin: 0 auto;
+    text-align: center;
+  }
+  .donation-card h3 {
+    font-size: 15px;
+    font-weight: bold;
+    margin-bottom: 4px;
+  }
+  .donation-card .donation-sub {
+    font-size: 11px;
+    color: #888;
+    margin-bottom: 16px;
+  }
+  .donation-card .donation-btn {
+    display: block;
+    border: 1.5px solid #333;
+    padding: 12px;
+    font-size: 13px;
+    font-weight: bold;
+    color: #333;
+    border-radius: 2px;
+    margin-bottom: 16px;
+  }
+  .fax-box {
+    border: 1px solid #ddd;
+    padding: 14px;
+    background: #fafafa;
+    text-align: left;
+  }
+  .fax-box h4 { font-size: 12px; font-weight: bold; margin-bottom: 6px; }
+  .fax-box p { font-size: 11px; color: #666; line-height: 1.6; }
+  .fax-box .dl-links { margin-top: 8px; }
+  .fax-box .dl-links a { font-size: 11px; color: #1d9e75; text-decoration: underline; margin-right: 12px; }
+
+  /* FAQ */
+  .faq-section {
+    padding: 28px 40px;
+    border-bottom: 1px solid #eee;
+  }
+  .faq-section h2 {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 20px;
+  }
+  .faq-item { margin-bottom: 20px; }
+  .faq-q {
+    font-size: 13px;
+    font-weight: bold;
+    margin-bottom: 6px;
+    color: #222;
+  }
+  .faq-a {
+    font-size: 13px;
+    color: #555;
+    line-height: 1.7;
+    padding-left: 16px;
+  }
+
+  /* 所長メッセージ */
+  .message-section {
+    padding: 28px 40px;
+    border-bottom: 1px solid #eee;
+  }
+  .message-section h2 {
+    font-size: 15px;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  .message-inner {
+    display: grid;
+    grid-template-columns: 100px minmax(0, 1fr);
+    gap: 20px;
+    align-items: start;
+  }
+  .message-photo {
+    background: #ddd;
+    height: 100px;
+    border: 1px solid #ccc;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    color: #aaa;
+  }
+  .message-photo::after { content: '写真'; }
+  .message-body h3 {
+    font-size: 15px;
+    font-weight: bold;
+    margin-bottom: 8px;
+  }
+  .message-body p {
+    font-size: 13px;
+    color: #555;
+    line-height: 1.8;
+  }
+  .message-body .author {
+    text-align: right;
+    font-size: 13px;
+    color: #333;
+    margin-top: 12px;
+  }
+
+  /* メディア実績 */
+  .media-bar {
+    background: #e8e8e8;
+    padding: 14px 40px;
+    font-size: 12px;
+    color: #555;
+  }
+  .media-bar strong { color: #333; }
+
+  /* ページ上部ラベル */
+  .page-meta {
+    background: #fffbe6;
+    border-bottom: 1px dashed #e0d080;
+    padding: 8px 24px;
+    font-size: 11px;
+    color: #888;
+    display: flex;
+    gap: 16px;
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- ページメタ情報 -->
+  <div class="page-meta">
+    <span>ワイヤーフレーム｜法人向けドネーションページ</span>
+    <span>※グレー枠＝画像プレースホルダー　□＝チェックボックス（特典リスト）</span>
+  </div>
+
+  <!-- ナビゲーション -->
+  <div class="nav">
+    <div></div>
+    <div class="nav-link">個人の方はこちら</div>
+  </div>
+
+  <!-- ヒーローエリア -->
+  <div class="hero">
+    <div class="wire-label">ヒーロー画像エリア</div>
+    <h1>キャッチコピーが<br>入ります</h1>
+    <p>サブコピー・リード文が入ります。法人向けのメッセージを短く。</p>
+  </div>
+
+  <!-- 2択ボタン -->
+  <div class="section">
+    <div class="cta-buttons">
+      <div class="cta-btn">
+        <div class="btn-sub">法人賛助会員になって寄付</div>
+        <div class="btn-main">継続的なご支援</div>
+      </div>
+      <div class="cta-btn">
+        <div class="btn-sub">一般寄付・指定寄付</div>
+        <div class="btn-main">単発の寄付・指定寄付</div>
+      </div>
+      <div class="cta-btn">
+        <div class="btn-sub">共同開発・研修導入など</div>
+        <div class="btn-main">寄付以外のご相談</div>
+      </div>
+    </div>
+
+    <!-- 税制優遇 -->
+    <div class="tax-block">
+      <p>当研究所は<span class="highlight">特定公益増進法人</span>です。法人様からのご寄付は、一般の寄附金とは別枠で法人税の損金算入の対象となります。</p>
+      <p class="note">※ 詳細な計算方法・手続きについては、<a href="https://www.nta.go.jp/taxes/shiraberu/taxanswer/hojin/5283.htm" target="_blank">国税庁ウェブサイト</a>または担当の税理士にご確認ください。</p>
+    </div>
+  </div>
+
+  <!-- 団体紹介 -->
+  <div class="section">
+    <div class="wire-label">団体紹介エリア</div>
+    <div class="org-intro">
+      <div class="org-img"></div>
+      <div class="org-text">
+        <h3>公益社団法人 子どもの発達科学研究所は<br>XXXXXXXを目指す団体です</h3>
+        <p>そのために以下のような取り組みをしています。そのために以下のような取り組みをしています。</p>
+      </div>
+    </div>
+
+    <!-- 活動領域3つ -->
+    <div class="activities">
+      <div class="activity-card">
+        <div class="activity-img"></div>
+        <h4>学校支援</h4>
+        <p>テキストテキストテキストテキストテキスト</p>
+      </div>
+      <div class="activity-card">
+        <div class="activity-img"></div>
+        <h4>研究</h4>
+        <p>テキストテキストテキストテキストテキスト</p>
+      </div>
+      <div class="activity-card">
+        <div class="activity-img"></div>
+        <h4>啓発</h4>
+        <p>コハツWEBなどやってます的なテキスト</p>
+      </div>
+    </div>
+
+    <!-- SDGs -->
+    <div class="sdgs">
+      <p class="sdgs-label">私たちの活動とSDGs</p>
+      <p class="sdgs-intro">子どもの発達科学研究所の活動は、社会課題の解決やSDGsの目標達成につながっています。貴社のご支援は、CSR・SDGs活動の一環として位置づけていただけます。</p>
+      <div class="sdgs-grid">
+        <div class="sdg-item">
+          <div class="sdg-icon sdg-3">3</div>
+          <div class="sdg-text">
+            <p class="sdg-title">すべての人に健康と福祉を</p>
+            <p class="sdg-desc">デジタルツール・学習プログラムの開発提供を通じ、子どもたちのメンタルヘルスを可視化し、自殺予防やウェルビーイング向上につなげます。</p>
+          </div>
+        </div>
+        <div class="sdg-item">
+          <div class="sdg-icon sdg-4">4</div>
+          <div class="sdg-text">
+            <p class="sdg-title">質の高い教育をみんなに</p>
+            <p class="sdg-desc">いじめ予防や不登校対策、学校風土改善のためのアセスメント・アクションを学校や自治体に提供し、だれも取り残されない学習環境を構築します。</p>
+          </div>
+        </div>
+        <div class="sdg-item">
+          <div class="sdg-icon sdg-10">10</div>
+          <div class="sdg-text">
+            <p class="sdg-title">人や国の不平等をなくそう</p>
+            <p class="sdg-desc">発達研究に基づく支援プログラムや啓発活動を通じ、一人ひとりが認め合い、理解し合える社会づくりに取り組みます。</p>
+          </div>
+        </div>
+        <div class="sdg-item">
+          <div class="sdg-icon sdg-16">16</div>
+          <div class="sdg-text">
+            <p class="sdg-title">平和と公正をすべての人に</p>
+            <p class="sdg-desc">いじめや不適切養育など、子どもを取り巻くあらゆる暴力を、科学的根拠に基づいた予防策を通じて取り除いていきます。</p>
+          </div>
+        </div>
+        <div class="sdg-item">
+          <div class="sdg-icon sdg-17">17</div>
+          <div class="sdg-text">
+            <p class="sdg-title">パートナーシップで目標を達成しよう</p>
+            <p class="sdg-desc">発達研究の社会実装を通し、学校や首長部局、行政、地域住民や企業とのパートナーシップを進め、子どもたちのウェルビーイング向上を実現します。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 支援企業ロゴ -->
+  <div class="supporters">
+    <div class="supporters-title">支援企業・団体</div>
+    <div class="logo-grid">
+      <div class="logo-box"></div>
+      <div class="logo-box"></div>
+      <div class="logo-box"></div>
+      <div class="logo-box"></div>
+      <div class="logo-box"></div>
+      <div class="logo-box"></div>
+    </div>
+  </div>
+
+  <!-- CTAバナー（寄付以外の相談） -->
+  <div class="cta-banner">
+    <div class="cta-banner-text">
+      <h3>寄付以外のご相談もお気軽に</h3>
+      <p>共同開発・コラボ、企業向け研修の導入相談など、<br>まずはお気軽にお問い合わせください。</p>
+    </div>
+    <div class="cta-banner-btn">お問い合わせフォームへ →</div>
+  </div>
+
+  <!-- メディア実績 -->
+  <div class="media-bar">
+    <strong>メディア実績</strong>　朝日新聞「xxx」(20XX.XX.) / XXテレビ「xxx」(20XX.XX.) / XXXXXX…
+  </div>
+
+  <!-- ===== 申込みセクション ===== -->
+  <div class="section-heading">
+    <h2>法人賛助会員になって継続的な寄付をする</h2>
+    <p>法人賛助会員になると年会費が寄付になります。また、さまざまな特典・リターンをご用意しております。</p>
+  </div>
+
+  <div class="plan-grid">
+    <div class="plan-card">
+      <h3>法人賛助会員</h3>
+      <p class="plan-sub">法人でのご支援</p>
+      <p class="plan-price">年会費 XXX円</p>
+      <p class="plan-note">（＋入会金 XXX円）</p>
+      <hr class="plan-divider">
+      <div class="plan-benefits">
+        <p>特典</p>
+        <p>特典</p>
+        <p>特典</p>
+        <p>特典</p>
+      </div>
+      <a class="plan-btn" href="#">お申し込み（年払い）</a>
+      <a class="plan-btn" href="#">お申し込み（月払い）</a>
+      <p class="plan-bank"><a href="#">銀行振込でのお申し込みはこちら</a></p>
+    </div>
+    <div class="plan-card">
+      <h3>法人特別賛助会員</h3>
+      <p class="plan-sub">より手厚いご支援（法人）</p>
+      <p class="plan-price">年会費 XXX円</p>
+      <p class="plan-note">（＋入会金 XXX円）</p>
+      <hr class="plan-divider">
+      <div class="plan-benefits">
+        <p>特典</p>
+        <p>特典</p>
+        <p>特典</p>
+        <p>特典</p>
+      </div>
+      <a class="plan-btn" href="#">お申し込み（年払い）</a>
+      <a class="plan-btn" href="#">お申し込み（月払い）</a>
+      <p class="plan-bank"><a href="#">銀行振込でのお申し込みはこちら</a></p>
+    </div>
+  </div>
+
+  <div class="rejoining-note">
+    ※ 以前ご入会いただいた法人様は、再入会の際に入会金は不要です。以下よりお申し込みください。
+    <div class="btn-row">
+      <span class="small-btn">ボタン</span>
+      <span class="small-btn">ボタン</span>
+      <span class="small-btn">ボタン</span>
+      <span class="small-btn">ボタン</span>
+    </div>
+  </div>
+
+  <!-- 一般・指定寄付 -->
+  <div class="section-heading">
+    <h2>単発の一般寄付・指定寄付をする</h2>
+    <p>お申し込みいただいた後、担当者よりご連絡を差し上げます。</p>
+  </div>
+
+  <div class="donation-card-wrap">
+    <div class="donation-card">
+      <h3>一般寄付・指定寄付</h3>
+      <p class="donation-sub">一般寄付 100万円〜 / 指定寄付 要相談</p>
+      <hr class="plan-divider">
+      <div class="plan-benefits" style="text-align:left">
+        <p>特典</p>
+        <p>特典</p>
+        <p>特典</p>
+        <p>特典</p>
+      </div>
+      <a class="donation-btn" href="#">お申し込みフォームへ</a>
+      <div class="fax-box">
+        <h4>メール・Faxからのお申込み</h4>
+        <p>メールアドレス、FAX番号については申込み用紙内に記載がありますので、そちらにDLの上で送ってください。</p>
+        <div class="dl-links">
+          <a href="#">寄付申請書（Excel）</a>
+          <a href="#">寄付申請書（PDF）</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== 所長メッセージ ===== -->
+  <div class="message-section">
+    <h2>所長・主任研究員より</h2>
+    <div class="message-inner">
+      <div class="message-photo"></div>
+      <div class="message-body">
+        <h3>セリフセリフ</h3>
+        <p>感情と信頼に訴えるような依頼メッセージ的なテキストを簡単に。感情と信頼に訴えるような依頼メッセージ的なテキストを簡単に。感情と信頼に訴えるような依頼メッセージ的なテキストを簡単に。</p>
+        <p class="author">和久田学</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== FAQ ===== -->
+  <div class="faq-section">
+    <h2>よくあるご質問</h2>
+    <div class="faq-item">
+      <p class="faq-q">Ｑ．法人賛助会員の会員期間はいつからいつまでですか？</p>
+      <p class="faq-a">Ａ．カード決済をご利用の方は、サブスクリプション形式で退会まで自動更新となります。月払いの方は翌月同日まで。年払いの方は、翌年同月日までとなります。</p>
+    </div>
+    <div class="faq-item">
+      <p class="faq-q">Ｑ．法人賛助会員を一度退会した場合、再登録した時に入会金はかかりますか？途中解約は返金されますか？</p>
+      <p class="faq-a">Ａ．一度退会された場合でも、再登録の際に入会金は不要です。なお、途中退会された場合、残りの期間があっても返金はいたしかねます。あらかじめご了承ください。</p>
+    </div>
+    <div class="faq-item">
+      <p class="faq-q">Ｑ．申込みをしたのにメールが届きません</p>
+      <p class="faq-a">Ａ．１週間以内に連絡がこない場合は、何らかの不具合が発生している可能性があります。お手数ですが電話にてお問い合わせください。<br>電話番号：053-456-0575　営業時間：平日9:00-18:00</p>
+    </div>
+    <div class="faq-item">
+      <p class="faq-q">Ｑ．法人賛助会員はやめたいときに解約できますか？</p>
+      <p class="faq-a">Ａ．ご自身のタイミングでご解約いただけます。マイページの「賛助会員自動更新の解除について」から解約のお手続きをお願いします。</p>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>
