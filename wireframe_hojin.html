@@ -92,7 +92,7 @@
   /* 2択ボタン */
   .cta-buttons {
     display: grid;
-    grid-template-columns: repeat(3, minmax(160px, 1fr));
+    grid-template-columns: repeat(2, minmax(160px, 1fr));
     gap: 16px;
     margin-bottom: 0;
   }
@@ -573,6 +573,18 @@
     display: flex;
     gap: 16px;
   }
+  @media print {
+    body { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .page { min-width: 0; width: 100%; margin: 0; border: none; }
+    .cta-buttons { grid-template-columns: repeat(3, 1fr) !important; }
+    .activities { grid-template-columns: repeat(3, 1fr) !important; }
+    .plan-grid { grid-template-columns: repeat(2, 1fr) !important; }
+    .logo-grid { grid-template-columns: repeat(6, 1fr) !important; }
+    .org-intro { grid-template-columns: 180px 1fr !important; }
+    .message-inner { grid-template-columns: 100px 1fr !important; }
+    .cta-banner { display: flex !important; }
+    .sdg-item { grid-template-columns: 48px 1fr !important; }
+  }
 </style>
 </head>
 <body>
@@ -608,16 +620,6 @@
         <div class="btn-sub">一般寄付・指定寄付</div>
         <div class="btn-main">単発の寄付・指定寄付</div>
       </div>
-      <div class="cta-btn">
-        <div class="btn-sub">共同開発・研修導入など</div>
-        <div class="btn-main">寄付以外のご相談</div>
-      </div>
-    </div>
-
-    <!-- 税制優遇 -->
-    <div class="tax-block">
-      <p>当研究所は<span class="highlight">特定公益増進法人</span>です。法人様からのご寄付は、一般の寄附金とは別枠で法人税の損金算入の対象となります。</p>
-      <p class="note">※ 詳細な計算方法・手続きについては、<a href="https://www.nta.go.jp/taxes/shiraberu/taxanswer/hojin/5283.htm" target="_blank">国税庁ウェブサイト</a>または担当の税理士にご確認ください。</p>
     </div>
   </div>
 
@@ -651,7 +653,19 @@
       </div>
     </div>
 
-    <!-- SDGs -->
+    <!-- 活動実績 -->
+    <div class="media-bar" style="margin: 24px -40px -32px;">
+      <strong>活動実績</strong>　「特別支援教育・不登校担当の校内連携体制の在り方に関する調査研究」（文部科学省）/「不登校の要因分析に関する調査研究」（文部科学省）/「学校外からのアプローチによるいじめ解消の仕組みづくり」（こども家庭庁）/ etc…
+    </div>
+  </div>
+
+  <!-- 税制優遇 + SDGs -->
+  <div class="section">
+    <div class="tax-block">
+      <p>当研究所は<span class="highlight">特定公益増進法人</span>です。法人様からのご寄付は、一般の寄附金とは別枠で法人税の損金算入の対象となります。</p>
+      <p class="note">※ 詳細な計算方法・手続きについては、<a href="https://www.nta.go.jp/taxes/shiraberu/taxanswer/hojin/5283.htm" target="_blank">国税庁ウェブサイト</a>または担当の税理士にご確認ください。</p>
+    </div>
+
     <div class="sdgs">
       <p class="sdgs-label">私たちの活動とSDGs</p>
       <p class="sdgs-intro">子どもの発達科学研究所の活動は、社会課題の解決やSDGsの目標達成につながっています。貴社のご支援は、CSR・SDGs活動の一環として位置づけていただけます。</p>
@@ -720,6 +734,19 @@
   <!-- メディア実績 -->
   <div class="media-bar">
     <strong>メディア実績</strong>　朝日新聞「xxx」(20XX.XX.) / XXテレビ「xxx」(20XX.XX.) / XXXXXX…
+  </div>
+
+  <!-- ===== 所長メッセージ ===== -->
+  <div class="message-section">
+    <h2>所長・主任研究員より</h2>
+    <div class="message-inner">
+      <div class="message-photo"></div>
+      <div class="message-body">
+        <h3>セリフセリフ</h3>
+        <p>感情と信頼に訴えるような依頼メッセージ的なテキストを簡単に。感情と信頼に訴えるような依頼メッセージ的なテキストを簡単に。感情と信頼に訴えるような依頼メッセージ的なテキストを簡単に。</p>
+        <p class="author">和久田学</p>
+      </div>
+    </div>
   </div>
 
   <!-- ===== 申込みセクション ===== -->
@@ -798,19 +825,6 @@
           <a href="#">寄付申請書（Excel）</a>
           <a href="#">寄付申請書（PDF）</a>
         </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- ===== 所長メッセージ ===== -->
-  <div class="message-section">
-    <h2>所長・主任研究員より</h2>
-    <div class="message-inner">
-      <div class="message-photo"></div>
-      <div class="message-body">
-        <h3>セリフセリフ</h3>
-        <p>感情と信頼に訴えるような依頼メッセージ的なテキストを簡単に。感情と信頼に訴えるような依頼メッセージ的なテキストを簡単に。感情と信頼に訴えるような依頼メッセージ的なテキストを簡単に。</p>
-        <p class="author">和久田学</p>
       </div>
     </div>
   </div>
